@@ -20,25 +20,25 @@
   姓: <input type="text" placeholder="First Name" v-model="firstName"><br>
   名: <input type="text" placeholder="Last Name" v-model="lastName"><br>
   姓名1(单向): <input type="text" placeholder="Full Name1" v-model="fullName1"><br>
-  姓名2(单向): <input type="text" placeholder="Full Name2"><br>
+  姓名2(单向): <input type="text" placeholder="Full Name2" v-model="fullName2"><br>
   姓名3(双向): <input type="text" placeholder="Full Name3" v-model="fullName3"><br>
 </div>
 
 <script type="text/javascript" src="../js/vue2.5.16.js"></script>
 <script type="text/javascript">
 const vm = new Vue ({
-  el:'#demo',
-  data:{
-    firstName:'a',
-    lastName:'b',
-//    fullName1:'a+b'
+  el: '#demo',
+  data: {
+    firstName: 'a',
+    lastName: 'b',
+    fullName2:'a+b'
   },
-  computed:{
+  computed: {
     fullName1(){
       return this.firstName + '-' + this.lastName;
     },
 
-    fullName3:{
+    fullName3: {
       get(){
         return this.firstName + '-' + this.lastName;
       },
@@ -48,9 +48,22 @@ const vm = new Vue ({
         this.lastName = name[1]
       }
     }
+  },
+
+ watch:{
+    //监视firstName
+    firstName(value){
+      this.fullName2 = value + '-' + this.lastName
+    }
   }
 
 })
+
+  //监视lastName
+  vm.$watch('lastName',function (value) {
+    //更新fullName2
+    this.fullName2 = this.firstName + '-' + value
+  })
 </script>
 </body>
 </html>

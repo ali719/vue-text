@@ -15,6 +15,18 @@
   4. 显示数据 : {{xxx}}
   5. 理解vue的mvvm实现
 -->
-
+<div id="app">
+  <input type="text" v-model="msg">
+  <p>hello {{msg}}</p>
+  <script type="text/javascript" src="../js/vue2.5.16.js"></script>
+  <script type="text/javascript">
+    new Vue ({
+      el:'#app',
+      data:{
+        msg:'atguigu'
+      }
+    })
+  </script>
+</div>
 </body>
 </html>
