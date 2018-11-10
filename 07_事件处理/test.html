@@ -23,16 +23,56 @@
 <div id="example">
 
   <h2>1. 绑定监听</h2>
+  <button @click="text1">text1</button>
+  <button @click="text2('text22')">text2</button>
+  <button @click="text3('333',$event)">text3</button>
 
   <h2>2. 事件修饰符</h2>
+  <a href="http://www.baidu.com" @click.prevent="text1">百度一下</a>
+  <div style="width: 200px; height: 200px; background: red;" @click="text4">
+    <div style="width: 100px; height: 100px; background: yellow;" @click.stop="text5"></div>
+  </div>
 
   <h2>3. 按键修饰符</h2>
+  <input type="text" @keyup="text6">
+  <input type="text" @keyup.enter="text7">
+  <input type="text" @keyup.65="text7">
 
 </div>
 
-<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript" src="../js/vue2.5.16.js"></script>
 <script type="text/javascript">
+new Vue({
+  el:'#example',
+  data:{
 
+  },
+  methods:{
+    text1(event){
+      alert(event.target.textContent)
+    },
+    text2(content){
+      alert(content)
+    },
+    text3(content,e){
+      alert(content + '---'+e.target.textContent)
+    },
+    text4(){
+      alert('外部')
+    },
+    text5(){
+      alert('内部')
+    },
+    text6(event){
+      if (event.keyCode === 13){//keyCode=13:enter键
+        alert(event.target.value + '---' + event.keyCode)
+      }
+    },
+    text7(event){
+      alert(event.target.value)
+    }
+  }
+})
 </script>
 </body>
 </html>
